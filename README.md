@@ -1,23 +1,17 @@
-# bjne (Beautiful Japanese NES Emulator)
+# bjne forked
 
-This is a NES emulator that's source code is:
-
-* very simple
-* very short
-* very straight-forward
+元リポジトリは現在の環境ではビルドが通らなかったりしたので適当に修正。
 
 ## Required Packages
 
 * g++
 * boost
 * SDL
-* python
+* [SCons](http://scons.org/)
 
-## Installation
+## Build
 
-    $ ./waf configure
-    $ ./waf
-    $ sudo ./waf install
+    $ scons
 
 ## Running bjne
 
