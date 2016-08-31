@@ -5,18 +5,18 @@
 #include "renderer.h"
 #include "serializer.h"
 
-class mapper{
+class mapper {
 public:
-  virtual ~mapper() {}
-  virtual void write(u16 adr,u8 dat) {}
-  virtual void hblank(int line) {}
-  virtual void audio(sound_info *info) {}
-  virtual void serialize(state_data &sd) {}
+    virtual ~mapper() {}
+    virtual void write(u16 adr, u8 dat) {}
+    virtual void hblank(int line) {}
+    virtual void audio(sound_info* info) {}
+    virtual void serialize(state_data& sd) {}
 };
 
-class mapper_maker{
+class mapper_maker {
 public:
-  mapper *make_mapper(int num,nes *n);
+    mapper* make_mapper(int num, nes* n);
 };
 
 #endif

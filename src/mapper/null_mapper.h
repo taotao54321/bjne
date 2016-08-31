@@ -3,6 +3,7 @@
 
 #include "../nes.h"
 
-class null_mapper : public mapper {};
+class null_mapper : public mapper {
+};
 
 #endif
