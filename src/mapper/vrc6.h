@@ -133,7 +133,7 @@ public:
   }
   
   void hblank(int line){
-    // VBlank ’†‚Å‚àƒCƒ“ƒNƒŠƒƒ“ƒg‚³‚ê‘±‚¯‚é
+    // VBlank ä¸­ã§ã‚‚ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã•ã‚Œç¶šã‘ã‚‹
     if (irq_enable&2){
       if (irq_count>=0xFF){
         _nes->get_cpu()->set_irq(true);
@@ -157,7 +157,7 @@ public:
         snd_write(wd.adr,wd.dat);
       }
 
-      // ƒTƒ“ƒvƒ‹(6ƒrƒbƒg’l)
+      // ã‚µãƒ³ãƒ—ãƒ«(6ãƒ“ãƒƒãƒˆå€¤)
       double d=(sq_produce(sq[0],sample_clk)+
                 sq_produce(sq[1],sample_clk)+
                 saw_produce(sample_clk))/32.0;

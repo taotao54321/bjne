@@ -88,7 +88,7 @@ public:
   }
 
   void hblank(int line){
-    // VBlank ’†‚Å‚àƒCƒ“ƒNƒŠƒƒ“ƒg‚³‚ê‘±‚¯‚é
+    // VBlank ä¸­ã§ã‚‚ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆã•ã‚Œç¶šã‘ã‚‹
     if (irq_enable&2){
       if (irq_count>0xFF){
         _nes->get_cpu()->set_irq(true);

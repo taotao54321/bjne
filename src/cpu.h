@@ -19,8 +19,8 @@ public:
   void set_irq(bool b);
   void set_reset(bool b);
 
-  s64 get_master_clock(); // ƒGƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“ŠJn‚©‚ç‚Ì—İÏƒNƒƒbƒN‚ğ•Ô‚·B
-  double get_frequency(); // “®ìü”g”‚ğ•Ô‚·
+  s64 get_master_clock(); // ã‚¨ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹ã‹ã‚‰ã®ç´¯ç©ã‚¯ãƒ­ãƒƒã‚¯ã‚’è¿”ã™ã€‚
+  double get_frequency(); // å‹•ä½œå‘¨æ³¢æ•°ã‚’è¿”ã™
 
   void serialize(state_data &sd);
 

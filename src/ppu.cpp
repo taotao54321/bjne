@@ -68,7 +68,7 @@ void ppu::set_mirroring(int m0,int m1,int m2,int m3)
 
 void ppu::render(int line,screen_info *scri)
 {
-  u8 buf[256+16]; // ‘OŒã‚É8ƒhƒbƒg—]—T‚ğİ‚¯‚é‚±‚Æ‚É‚æ‚èˆ—‚ÌŠÈ—ª‰»‚ğ}‚é
+  u8 buf[256+16]; // å‰å¾Œã«8ãƒ‰ãƒƒãƒˆä½™è£•ã‚’è¨­ã‘ã‚‹ã“ã¨ã«ã‚ˆã‚Šå‡¦ç†ã®ç°¡ç•¥åŒ–ã‚’å›³ã‚‹
   u8 *p=buf+8;
 
   for (int i=0;i<256;i++) p[i]=palette[0];
@@ -78,7 +78,7 @@ void ppu::render(int line,screen_info *scri)
   if (_nes->get_regs()->sprite_visible)
     render_spr(line,p);
 
-  if (scri->bpp==24||scri->bpp==32){ // ƒtƒ‹ƒJƒ‰[
+  if (scri->bpp==24||scri->bpp==32){ // ãƒ•ãƒ«ã‚«ãƒ©ãƒ¼
     u8 *dest=(u8*)scri->buf+scri->pitch*line;
     int inc=scri->bpp/8;
     for (int i=0;i<256;i++){
@@ -86,13 +86,13 @@ void ppu::render(int line,screen_info *scri)
       dest+=inc;
     }
   }
-  else if (scri->bpp==16){ // ƒnƒCƒJƒ‰[
+  else if (scri->bpp==16){ // ãƒã‚¤ã‚«ãƒ©ãƒ¼
     u16 *dest=(u16*)((u8*)scri->buf+scri->pitch*line);
     for (int i=0;i<256;i++)
       dest[i]=nes_palette_16[p[i]&0x3f];
   }
   else{
-    // ƒTƒ|[ƒg‚µ‚Ü‚¹‚ñB
+    // ã‚µãƒãƒ¼ãƒˆã—ã¾ã›ã‚“ã€‚
   }
 }
 
@@ -165,8 +165,8 @@ int ppu::render_spr(int line,u8 *buf)
     u8 l=read_pat_table(tile_adr);
     u8 u=read_pat_table(tile_adr+8);
 
-    // ”w–ÊƒXƒvƒ‰ƒCƒg‚ğ•`‰æ‚³‚ê‚Ä‚¢‚½ê‡A‚»‚Ìã‚ÉBG‚ª‚©‚Ô‚³‚Á‚Ä‚¢‚Ä‚àA
-    // ‚»‚Ìã‚É‘O–ÊƒXƒvƒ‰ƒCƒg‚ª•`‰æ‚³‚ê‚é‚±‚Æ‚Í‚È‚¢B
+    // èƒŒé¢ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’æç”»ã•ã‚Œã¦ã„ãŸå ´åˆã€ãã®ä¸Šã«BGãŒã‹ã¶ã•ã£ã¦ã„ã¦ã‚‚ã€
+    // ãã®ä¸Šã«å‰é¢ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒæç”»ã•ã‚Œã‚‹ã“ã¨ã¯ãªã„ã€‚
     for (int x=sx;x!=ex;x+=ix){
       int lower=(l&1)|((u&1)<<1);
       if (lower!=0&&(buf[spr_x+x]&0x80)==0){
@@ -181,7 +181,7 @@ int ppu::render_spr(int line,u8 *buf)
 
 void ppu::sprite_check(int line)
 {
-  // sprite 0 hit ‚ğƒ`ƒFƒbƒN‚·‚éB
+  // sprite 0 hit ã‚’ãƒã‚§ãƒƒã‚¯ã™ã‚‹ã€‚
   if (_nes->get_regs()->sprite_visible){
     int spr_y=sprram[0]+1;
     int spr_height=_nes->get_regs()->sprite_size?16:8;

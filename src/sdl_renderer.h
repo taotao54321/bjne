@@ -42,7 +42,7 @@ public:
     ret.width=width;
     ret.height=height;
     ret.pitch=ren->pitch;
-    ret.bpp=32; // ‚ ‚Æ‚Å•Ï‚¦‚éB
+    ret.bpp=32; // ã‚ã¨ã§å¤‰ãˆã‚‹ã€‚
     ret.buf=ren->pixels;
 
     return &ret;
@@ -65,8 +65,8 @@ public:
     static int buf[256];
     static input_info ret={buf};
 
-    // ƒL[’è‹`B‚Æ‚è‚ ‚¦‚¸‚×‚½‚×‚½‚ÆB
-    // A B ƒZƒŒƒNƒg ƒXƒ^[ƒg ã ‰º ¶ ‰E
+    // ã‚­ãƒ¼å®šç¾©ã€‚ã¨ã‚Šã‚ãˆãšã¹ãŸã¹ãŸã¨ã€‚
+    // A B ã‚»ãƒ¬ã‚¯ãƒˆ ã‚¹ã‚¿ãƒ¼ãƒˆ ä¸Š ä¸‹ å·¦ å³
     int key_def[2][8]={
       {SDLK_z,SDLK_x,SDLK_RSHIFT,SDLK_RETURN,SDLK_UP,SDLK_DOWN,SDLK_LEFT,SDLK_RIGHT},
       {SDLK_v,SDLK_b,SDLK_n,SDLK_m,SDLK_0,SDLK_COMMA,SDLK_k,SDLK_l}
@@ -91,7 +91,7 @@ public:
     Uint16 *src=(Uint16*)info->buf;
     for (int i=0;i<info->sample;i++)
       buf[(dat+i)%RBUF_SIZE]=src[i];
-    dat=(dat+info->sample)%RBUF_SIZE; // ‹ó‚«‚ğ‘S•”–„‚ß‚½B
+    dat=(dat+info->sample)%RBUF_SIZE; // ç©ºãã‚’å…¨éƒ¨åŸ‹ã‚ãŸã€‚
   }
 
   virtual void output_message(const string &str){
@@ -127,13 +127,13 @@ private:
 
   void mix_audio(Uint8 *stream,int len){
     memcpy(stream,buf+play,len);
-    play=(play+len/2)%RBUF_SIZE; // len‚Í2‚Ì”{”‚Å‚ ‚Á‚Ä‚Ù‚µ‚¢B
+    play=(play+len/2)%RBUF_SIZE; // lenã¯2ã®å€æ•°ã§ã‚ã£ã¦ã»ã—ã„ã€‚
   }
 
   SDL_Surface *bg,*ren;
   int bef_width,bef_height;
 
-  Uint16 buf[RBUF_SIZE]; // ƒŠƒ“ƒOƒoƒbƒtƒ@
+  Uint16 buf[RBUF_SIZE]; // ãƒªãƒ³ã‚°ãƒãƒƒãƒ•ã‚¡
   int dat,play;
 
   bool skip;

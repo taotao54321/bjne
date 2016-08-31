@@ -6,7 +6,7 @@
 
 class nes;
 
-/* ƒƒ‚ƒŠƒRƒ“ƒgƒ[ƒ‰ */
+/* ãƒ¡ãƒ¢ãƒªã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ© */
 
 class mbc{
 public:
@@ -23,7 +23,7 @@ public:
 
   void map_rom (int page,int val); // swap 8k banks
   void map_vrom(int page,int val); // swap 1k banks
-  void map_vram(int page,int val); // “¯ã
+  void map_vram(int page,int val); // åŒä¸Š
   void sram_enable(bool b);
 
   void serialize(state_data &sd);

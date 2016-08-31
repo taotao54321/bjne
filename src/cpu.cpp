@@ -23,7 +23,7 @@ void cpu::reset()
   reg_y=0x00;
   reg_s=0xFF;
 
-  n_flag=v_flag=z_flag=c_flag=0; // •s’è‚¾‚¯‚ÇÄŒ»«‚Ì‚½‚ß‚ÉƒŠƒZƒbƒg‚µ‚Ä‚¨‚­
+  n_flag=v_flag=z_flag=c_flag=0; // ä¸å®šã ã‘ã©å†ç¾æ€§ã®ãŸã‚ã«ãƒªã‚»ãƒƒãƒˆã—ã¦ãŠã
   b_flag=1;
   d_flag=0;
   i_flag=1;
@@ -35,7 +35,7 @@ void cpu::reset()
 
 void cpu::set_nmi(bool b)
 {
-  // ƒGƒbƒWƒZƒ“ƒVƒeƒBƒu‚ÈŠ„‚è‚İ
+  // ã‚¨ãƒƒã‚¸ã‚»ãƒ³ã‚·ãƒ†ã‚£ãƒ–ãªå‰²ã‚Šè¾¼ã¿
   if (!nmi_line&&b)
     exec_irq(NMI);
   nmi_line=b;
@@ -43,14 +43,14 @@ void cpu::set_nmi(bool b)
 
 void cpu::set_irq(bool b)
 {
-  // ‚¨‚»‚ç‚­ƒŒƒxƒ‹ƒZƒ“ƒVƒeƒBƒu‚ÈŠ„‚è‚İ
-  // ˆ—‚ÌŠÈ•Ö‚Ì‚½‚ß‚ÉA–½—ßƒtƒFƒbƒ`‘O‚ÉŠ„‚è‚İƒ`ƒFƒbƒN‚ğ‚·‚é
+  // ãŠãã‚‰ããƒ¬ãƒ™ãƒ«ã‚»ãƒ³ã‚·ãƒ†ã‚£ãƒ–ãªå‰²ã‚Šè¾¼ã¿
+  // å‡¦ç†ã®ç°¡ä¾¿ã®ãŸã‚ã«ã€å‘½ä»¤ãƒ•ã‚§ãƒƒãƒå‰ã«å‰²ã‚Šè¾¼ã¿ãƒã‚§ãƒƒã‚¯ã‚’ã™ã‚‹
   irq_line=b;
 }
 
 void cpu::set_reset(bool b)
 {
-  // “¯ã
+  // åŒä¸Š
   reset_line=b;
 }
 
@@ -77,7 +77,7 @@ void cpu::write16(u16 adr,u16 dat)
 
 #define _imm() (reg_pc++)
 
-// TODO Œ…ã‚ª‚è‚Ìƒyƒiƒ‹ƒeƒB[
+// TODO æ¡ä¸ŠãŒã‚Šã®ãƒšãƒŠãƒ«ãƒ†ã‚£ãƒ¼
 #define _abs()  (reg_pc+=2,read16(opr_pc))
 #define _abxi() (reg_pc+=2,read16(read16(opr_pc)+reg_x))
 #define _abx()  (reg_pc+=2,read16(opr_pc)+reg_x)
@@ -103,7 +103,7 @@ void cpu::write16(u16 adr,u16 dat)
   v_flag=(dat>>6)&1; \
   b_flag=(dat>>4)&1; \
   d_flag=(dat>>3)&1; \
-  i_flag=(dat>>2)&1; /* (i‚ªƒNƒŠƒA‚³‚ê‚½ê‡AŠ„‚è‚Ü‚ê‚é‰Â”\«‚ª) */ \
+  i_flag=(dat>>2)&1; /* (iãŒã‚¯ãƒªã‚¢ã•ã‚ŒãŸå ´åˆã€å‰²ã‚Šè¾¼ã¾ã‚Œã‚‹å¯èƒ½æ€§ãŒ) */ \
   z_flag=(dat>>1)&1; \
   c_flag=dat&1; \
 }
@@ -246,14 +246,14 @@ void cpu::write16(u16 adr,u16 dat)
   } \
 }
 
-// clkƒNƒƒbƒNÀs(Å’áˆê–½—ß‚ÍÀs‚·‚é)
+// clkã‚¯ãƒ­ãƒƒã‚¯å®Ÿè¡Œ(æœ€ä½ä¸€å‘½ä»¤ã¯å®Ÿè¡Œã™ã‚‹)
 void cpu::exec(int clk)
 {
   rest+=clk;
   mclock+=clk;
   do{
-    if (!i_flag){ // IRQ ƒ`ƒFƒbƒN
-      // Š„‚è‚İ‚ª‚©‚©‚é‚Æƒ‰ƒCƒ“‚ÌƒŒƒxƒ‹‚ğ—‚Æ‚·B–{“–‚Íˆá‚¤‚ñ‚¾‚ë‚¤‚¯‚ÇB
+    if (!i_flag){ // IRQ ãƒã‚§ãƒƒã‚¯
+      // å‰²ã‚Šè¾¼ã¿ãŒã‹ã‹ã‚‹ã¨ãƒ©ã‚¤ãƒ³ã®ãƒ¬ãƒ™ãƒ«ã‚’è½ã¨ã™ã€‚æœ¬å½“ã¯é•ã†ã‚“ã ã‚ã†ã‘ã©ã€‚
       if (reset_line) exec_irq(RESET),reset_line=false;
       else if (irq_line) exec_irq(IRQ),irq_line=false;
     }
@@ -441,7 +441,7 @@ void cpu::exec(int clk)
 
     case 0x18: c_flag=0;rest-=2; break; // CLC
     case 0xD8: d_flag=0;rest-=2; break; // CLD
-    case 0x58: i_flag=0;rest-=2; break; // CLI (‚±‚ÌuŠÔ‚ÉŠ„‚è‚İ‚ª‚©‚©‚é‚©‚à’m‚ê‚ñc)
+    case 0x58: i_flag=0;rest-=2; break; // CLI (ã“ã®ç¬é–“ã«å‰²ã‚Šè¾¼ã¿ãŒã‹ã‹ã‚‹ã‹ã‚‚çŸ¥ã‚Œã‚“â€¦)
     case 0xB8: v_flag=0;rest-=2; break; // CLV
 
       /* stack */

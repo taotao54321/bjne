@@ -32,13 +32,13 @@ int main(int argc,char *argv[])
     return 0;
   }
 
-  // ƒtƒ@ƒCƒ‹ü‚è
+  // ãƒ•ã‚¡ã‚¤ãƒ«å‘¨ã‚Š
   fs::path rom_file(argv[1],fs::native);
   fs::path save_dir("save");
   fs::create_directory(save_dir);
   string save_base=get_base_name(rom_file);
 
-  // ‰Šú‰»
+  // åˆæœŸåŒ–
   cout<<"Initializing SDL renderer ..."<<endl;
   if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO|SDL_INIT_TIMER)<0){
     cout<<"failed to initialize SDL"<<endl;
@@ -77,7 +77,7 @@ int main(int argc,char *argv[])
   }
   //_nes->get_cpu()->set_logging(true);
 
-  // Àsƒ‹[ƒv
+  // å®Ÿè¡Œãƒ«ãƒ¼ãƒ—
   {
     cout<<"Start emulation ..."<<endl;
     fps_timer timer(60);

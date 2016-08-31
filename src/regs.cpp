@@ -104,7 +104,7 @@ u8 regs::read(u16 adr)
         int pad_num=adr-0x4016;
         int read_pos=joypad_read_pos[pad_num];
         u8 ret;
-        if (read_pos<8) // ƒpƒbƒhƒf[ƒ^
+        if (read_pos<8) // ãƒ‘ãƒƒãƒ‰ãƒ‡ãƒ¼ã‚¿
           ret=pad_dat[pad_num][read_pos]?1:0;
         else if (read_pos<16) // Ignored
           ret=0;
@@ -165,7 +165,7 @@ void regs::write(u16 adr,u8 dat)
     case 0x4016: // Joypad #1 (RW)
       {
         bool newval=(dat&1)!=0;
-        if (joypad_strobe&&!newval) // ‚½‚¿‰º‚èƒGƒbƒW‚ÅƒŠƒZƒbƒg
+        if (joypad_strobe&&!newval) // ãŸã¡ä¸‹ã‚Šã‚¨ãƒƒã‚¸ã§ãƒªã‚»ãƒƒãƒˆ
           joypad_read_pos[0]=joypad_read_pos[1]=0;
         joypad_strobe=newval;
       }
@@ -200,7 +200,7 @@ void regs::write(u16 adr,u8 dat)
     color_display =_bit(dat,0);
     break;
   case 2: // PPU Status Register (R)
-    // ‚Ç‚¤‚·‚é‚©c
+    // ã©ã†ã™ã‚‹ã‹â€¦
     cout<<"*** write to $2002"<<endl;
     break;
   case 3: // SPR-RAM Address Register (W)

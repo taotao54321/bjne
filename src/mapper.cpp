@@ -12,7 +12,7 @@
 mapper *mapper_maker::make_mapper(int num,nes *n)
 {
   switch(num){
-  case 0:  return new null_mapper(); // ‚È‚µ
+  case 0:  return new null_mapper(); // ãªã—
   case 1:  return new mmc1(n);    // MMC1
   case 2:  return new unrom(n);   // UNROM
   case 3:  return new cnrom(n);   // CNROM

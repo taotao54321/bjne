@@ -45,15 +45,15 @@ bool nes::load_sram(const char *fname)
 
 void nes::reset()
 {
-  // ROM‚ÆMBC‚Í‚Ù‚©‚æ‚èæ‚ÉƒŠƒZƒbƒg‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚¢‚¯‚È‚¢
+  // ROMã¨MBCã¯ã»ã‹ã‚ˆã‚Šå…ˆã«ãƒªã‚»ãƒƒãƒˆã•ã‚Œã¦ã„ãªã„ã¨ã„ã‘ãªã„
   _rom->reset();
   _mbc->reset();
 
-  // ƒ}ƒbƒp[ì¬
+  // ãƒžãƒƒãƒ‘ãƒ¼ä½œæˆ
   if (_mapper) delete _mapper;
   _mapper=mapper_maker().make_mapper(_rom->mapper_no(),this);
 
-  // ‚»‚Ì‘¼‚ðƒŠƒZƒbƒg
+  // ãã®ä»–ã‚’ãƒªã‚»ãƒƒãƒˆ
   _cpu->reset();
   _apu->reset();
   _ppu->reset();
@@ -106,7 +106,7 @@ bool nes::load_state(const char *fname)
 
 void nes::exec_frame()
 {
-  // CPUƒNƒƒbƒN‚Í1.7897725MHz‚Æ‚Ì‚±‚ÆB
+  // CPUã‚¯ãƒ­ãƒƒã‚¯ã¯1.7897725MHzã¨ã®ã“ã¨ã€‚
   // 1789772.5 / 60 / 262 = 113.85...
   // 1 line = 114 clock ?
   // 1789772.5 / 262 / 114 = 59.922 fps ?
@@ -142,7 +142,7 @@ void nes::exec_frame()
     _apu->sync();
     if (i==241){
       _regs->set_vblank(true,false);
-      _cpu->exec(0); // VBLANK“Ë“üŒãANMI”­¶‚Ü‚Å‚É1–½—ß‚®‚ç‚¢ŽÀs‚³‚ê‚éB
+      _cpu->exec(0); // VBLANKçªå…¥å¾Œã€NMIç™ºç”Ÿã¾ã§ã«1å‘½ä»¤ãã‚‰ã„å®Ÿè¡Œã•ã‚Œã‚‹ã€‚
       _regs->set_vblank(true,true);
       _cpu->exec(114);
     }

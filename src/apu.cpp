@@ -33,19 +33,19 @@ u8 apu::read(u16 adr)
       |((sdmc.enable?1:0)<<4)
       |((sdmc.irq?1:0)<<7);
   }
-  return 0xA0; // 4015ˆÈŠO‚Í“Ç‚İæ‚ê‚È‚¢‚ªAƒf[ƒ^ƒoƒX‚ÌƒLƒƒƒpƒVƒ^ƒ“ƒX‚ÌŠÖŒW‚Å0xA0‚ª“Ç‚İ‚ß‚é‚ç‚µ‚¢
+  return 0xA0; // 4015ä»¥å¤–ã¯èª­ã¿å–ã‚Œãªã„ãŒã€ãƒ‡ãƒ¼ã‚¿ãƒã‚¹ã®ã‚­ãƒ£ãƒ‘ã‚·ã‚¿ãƒ³ã‚¹ã®é–¢ä¿‚ã§0xA0ãŒèª­ã¿è¾¼ã‚ã‚‹ã‚‰ã—ã„
 }
 
 void apu::write(u16 adr,u8 dat)
 {
-  // ƒTƒEƒ“ƒh¶¬‚Ì“s‡ã‘‚«‚İ‚Í’x‰„‚³‚¹‚éB
+  // ã‚µã‚¦ãƒ³ãƒ‰ç”Ÿæˆã®éƒ½åˆä¸Šæ›¸ãè¾¼ã¿ã¯é…å»¶ã•ã›ã‚‹ã€‚
   write_queue.push(write_dat(_nes->get_cpu()->get_master_clock(),adr,dat));
-  while(write_queue.size()>100){ // ‚ ‚ñ‚Ü‚èƒLƒ…[‚ª‹l‚Ü‚é‚ÆÀs‚Éxá‚ğ‚«‚½‚·‚Ì‚Åc
+  while(write_queue.size()>100){ // ã‚ã‚“ã¾ã‚Šã‚­ãƒ¥ãƒ¼ãŒè©°ã¾ã‚‹ã¨å®Ÿè¡Œã«æ”¯éšœã‚’ããŸã™ã®ã§â€¦
     write_dat wd=write_queue.front();
     write_queue.pop();
     _write(ch,dmc,wd.adr,wd.dat);
   }
-  // ƒXƒe[ƒ^ƒXƒŒƒWƒXƒ^‚Ì‚½‚ß‚Ìˆ—
+  // ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ãƒ¬ã‚¸ã‚¹ã‚¿ã®ãŸã‚ã®å‡¦ç†
   sync();
   _write(sch,sdmc,adr,dat);
 }
@@ -55,7 +55,7 @@ void apu::_write(ch_state *ch,dmc_state &dmc,u16 adr,u8 dat)
   //if (adr>=0x4010)
   //  cout<<hex<<setw(4)<<setfill('0')<<adr<<" <- "<<setw(2)<<(int)dat<<endl;
   
-  // ÀÛ‚É‚Í‚±‚Á‚¿‚Å‘‚«‚Ş
+  // å®Ÿéš›ã«ã¯ã“ã£ã¡ã§æ›¸ãè¾¼ã‚€
   int cn=(adr&0x1f)/4;
   ch_state &cc=ch[cn];
 
@@ -240,16 +240,16 @@ double apu::dmc_produce(double clk)
   while (dmc.clk>dmc.wave_length){
     dmc.clk-=dmc.wave_length;
     if (dmc.shift_count==0){
-      if (dmc.length==0){ // I‚í‚Á‚Ä‚Ü‚·‚©
-        if ((dmc.playback_mode&1)!=0){ // ƒ‹[ƒvƒ‚[ƒh
+      if (dmc.length==0){ // çµ‚ã‚ã£ã¦ã¾ã™ã‹
+        if ((dmc.playback_mode&1)!=0){ // ãƒ«ãƒ¼ãƒ—ãƒ¢ãƒ¼ãƒ‰
           dmc.adr=dmc.adr_latch;
           dmc.length=dmc.length_latch;
         }
         else{
           dmc.enable=false;
-          if (dmc.playback_mode==2){ // IRQ”­¶
+          if (dmc.playback_mode==2){ // IRQç™ºç”Ÿ
             dmc.irq=true;
-            // _nes->get_cpu()->set_irq(true); // ÀÛ‚ÌŠ„‚è‚İ‚Ísync‚Å‹N‚±‚·
+            // _nes->get_cpu()->set_irq(true); // å®Ÿéš›ã®å‰²ã‚Šè¾¼ã¿ã¯syncã§èµ·ã“ã™
           }
           return retval;
         }
@@ -282,11 +282,11 @@ void apu::gen_audio(sound_info *info)
   s64 cur_clock=_nes->get_cpu()->get_master_clock();
   int sample=info->sample;
 
-  double inc_clk=((double)(cur_clock-bef_clock))/sample; // 1ƒTƒ“ƒvƒ‹‚ ‚½‚è‚ÌÀsCPUƒNƒƒbƒN
-  double sample_clk=cpu_clock/info->freq; // 1ƒTƒ“ƒvƒ‹‚ ‚½‚è‚ÌCPUƒNƒƒbƒN
+  double inc_clk=((double)(cur_clock-bef_clock))/sample; // 1ã‚µãƒ³ãƒ—ãƒ«ã‚ãŸã‚Šã®å®Ÿè¡ŒCPUã‚¯ãƒ­ãƒƒã‚¯
+  double sample_clk=cpu_clock/info->freq; // 1ã‚µãƒ³ãƒ—ãƒ«ã‚ãŸã‚Šã®CPUã‚¯ãƒ­ãƒƒã‚¯
 
   memset(info->buf,0,info->bps/8*info->sample*info->ch);
-  if (_nes->get_mapper()) // Šg’£‰¹Œ¹
+  if (_nes->get_mapper()) // æ‹¡å¼µéŸ³æº
     _nes->get_mapper()->audio(info);
 
   /*
@@ -341,7 +341,7 @@ void apu::gen_audio(sound_info *info)
         if (cc.linear_counter==0) pause=true;
       }
 
-      // ƒGƒ“ƒxƒ[ƒv
+      // ã‚¨ãƒ³ãƒ™ãƒ­ãƒ¼ãƒ—
       int vol=16;
       if (j!=TRI){
         if (cc.envelope_enable){
@@ -351,7 +351,7 @@ void apu::gen_audio(sound_info *info)
             cc.envelope_clk-=decay_clk;
             if (cc.volume>0) cc.volume--;
             else{
-              if (!cc.length_enable) // ƒ‹[ƒv
+              if (!cc.length_enable) // ãƒ«ãƒ¼ãƒ—
                 cc.volume=0xf;
               else
                 cc.volume=0;
@@ -361,7 +361,7 @@ void apu::gen_audio(sound_info *info)
         vol=cc.volume;
       }
 
-      // ƒXƒEƒB[ƒv
+      // ã‚¹ã‚¦ã‚£ãƒ¼ãƒ—
       if ((j==SQ1||j==SQ2)&&cc.sweep_enable&&!cc.sweep_pausing){
         double sweep_clk=cpu_clock/(120.0/(cc.sweep_rate+1));
         cc.sweep_clk+=inc_clk;
@@ -371,7 +371,7 @@ void apu::gen_audio(sound_info *info)
             if (!cc.sweep_mode) // increase
               cc.wave_length+=cc.wave_length>>cc.sweep_shift;
             else // decrease
-              cc.wave_length+=~(cc.wave_length>>cc.sweep_shift); // 1‚Ì•â”
+              cc.wave_length+=~(cc.wave_length>>cc.sweep_shift); // 1ã®è£œæ•°
             if (cc.wave_length<0x008) cc.sweep_pausing=true;
             if (cc.wave_length&~0x7FF) cc.sweep_pausing=true;
             cc.wave_length&=0x7FF;
@@ -383,7 +383,7 @@ void apu::gen_audio(sound_info *info)
       pause|=cc.wave_length==0;
       if (pause) continue;
 
-      // ”gŒ`¶¬
+      // æ³¢å½¢ç”Ÿæˆ
       double t=((j==SQ1||j==SQ2)?sq_produce(cc,sample_clk):
              (j==TRI)?tri_produce(cc,sample_clk):
              (j==NOI)?noi_produce(cc,sample_clk):0);
@@ -393,7 +393,7 @@ void apu::gen_audio(sound_info *info)
 
     v+=dmc_produce(sample_clk);
 
-    // o—Í
+    // å‡ºåŠ›
     if (info->bps==16)
       ((s16*)info->buf)[i]=(s16)min(32767.0,max(-32767.0,(((s16*)info->buf)[i]+v*8000)));
     else if (info->bps==8)
@@ -408,7 +408,7 @@ void apu::sync()
   s64 cur=_nes->get_cpu()->get_master_clock();
   int adv_clock=(int)cur-bef_sync;
 
-  // 4‚Â‚Ìƒ`ƒƒƒ“ƒlƒ‹‚ÌXV(’·‚³ƒJƒEƒ“ƒ^‚¾‚¯ˆ—‚µ‚Æ‚¯‚Î‚æ‚ë‚µ‚¢)
+  // 4ã¤ã®ãƒãƒ£ãƒ³ãƒãƒ«ã®æ›´æ–°(é•·ã•ã‚«ã‚¦ãƒ³ã‚¿ã ã‘å‡¦ç†ã—ã¨ã‘ã°ã‚ˆã‚ã—ã„)
   for (int j=0;j<4;j++){
     ch_state &cc=sch[j];
     // length counter
@@ -420,22 +420,22 @@ void apu::sync()
       cc.length=max(0,cc.length-dec);
     }
   }
-  // DMC‚ÌXV
+  // DMCã®æ›´æ–°
   if (sdmc.enable){
     sdmc.clk+=adv_clock;
     int dec=(int)(sdmc.clk/sdmc.wave_length);
     sdmc.clk-=dec*sdmc.wave_length;
 
     int rest=sdmc.shift_count+sdmc.length*8-dec;
-    if (rest<=0){ // Ä¶‚ªI‚í‚é
-      if ((sdmc.playback_mode&1)!=0){ // ƒ‹[ƒv‚·‚é
+    if (rest<=0){ // å†ç”ŸãŒçµ‚ã‚ã‚‹
+      if ((sdmc.playback_mode&1)!=0){ // ãƒ«ãƒ¼ãƒ—ã™ã‚‹
         sdmc.length=rest/8;
         while(sdmc.length<0) sdmc.length+=sdmc.length_latch;
         sdmc.shift_count=0;
       }
       else{
         sdmc.enable=false;
-        if (sdmc.playback_mode==2){ // IRQ”­¶
+        if (sdmc.playback_mode==2){ // IRQç™ºç”Ÿ
           sdmc.irq=true;
           _nes->get_cpu()->set_irq(true);
         }

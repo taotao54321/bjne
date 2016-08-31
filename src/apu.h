@@ -25,57 +25,57 @@ public:
 
 private:
   struct ch_state{
-    bool enable; // ƒ`ƒƒƒ“ƒlƒ‹‚ª—LŒø‚©
+    bool enable; // ãƒãƒ£ãƒ³ãƒãƒ«ãŒæœ‰åŠ¹ã‹
 
-    int wave_length; // ü”g”
+    int wave_length; // å‘¨æ³¢æ•°
 
-    bool length_enable; // ’·‚³ƒJƒEƒ“ƒ^—LŒø
-    int length; // ’·‚³ƒJƒEƒ“ƒ^
+    bool length_enable; // é•·ã•ã‚«ã‚¦ãƒ³ã‚¿æœ‰åŠ¹
+    int length; // é•·ã•ã‚«ã‚¦ãƒ³ã‚¿
     double length_clk;
 
-    int volume; // ƒ{ƒŠƒ…[ƒ€
-    int envelope_rate; // Œ¸ŠƒŒ[ƒg
-    bool envelope_enable; // Œ¸Š—LŒø
-    double envelope_clk; // “à•”ŒvZ—p
+    int volume; // ãƒœãƒªãƒ¥ãƒ¼ãƒ 
+    int envelope_rate; // æ¸›è¡°ãƒ¬ãƒ¼ãƒˆ
+    bool envelope_enable; // æ¸›è¡°æœ‰åŠ¹
+    double envelope_clk; // å†…éƒ¨è¨ˆç®—ç”¨
 
-    bool sweep_enable; // ƒXƒEƒB[ƒv—LŒø
-    int sweep_rate; // ƒXƒEƒB[ƒvƒŠƒtƒŒƒbƒVƒ…ƒŒ[ƒg
-    bool sweep_mode; // ƒXƒEƒB[ƒv‘Œ¸ƒ‚[ƒh
-    int sweep_shift; // ƒXƒEƒB[ƒvƒVƒtƒg—Ê
-    double sweep_clk; // “à•”ŒvZ—p
+    bool sweep_enable; // ã‚¹ã‚¦ã‚£ãƒ¼ãƒ—æœ‰åŠ¹
+    int sweep_rate; // ã‚¹ã‚¦ã‚£ãƒ¼ãƒ—ãƒªãƒ•ãƒ¬ãƒƒã‚·ãƒ¥ãƒ¬ãƒ¼ãƒˆ
+    bool sweep_mode; // ã‚¹ã‚¦ã‚£ãƒ¼ãƒ—å¢—æ¸›ãƒ¢ãƒ¼ãƒ‰
+    int sweep_shift; // ã‚¹ã‚¦ã‚£ãƒ¼ãƒ—ã‚·ãƒ•ãƒˆé‡
+    double sweep_clk; // å†…éƒ¨è¨ˆç®—ç”¨
     bool sweep_pausing;
 
-    int duty; // ƒfƒ…[ƒeƒB[”ä
+    int duty; // ãƒ‡ãƒ¥ãƒ¼ãƒ†ã‚£ãƒ¼æ¯”
 
-    int linear_latch; // ƒŠƒjƒAƒJƒEƒ“ƒ^[—pƒ‰ƒbƒ`
-    int linear_counter; // ƒŠƒjƒAƒJƒEƒ“ƒ^[
-    bool holdnote; // ƒŠƒjƒAƒJƒEƒ“ƒ^[“®ì’†?
-    int counter_start; // ƒJƒEƒ“ƒ^ŠJn
+    int linear_latch; // ãƒªãƒ‹ã‚¢ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ç”¨ãƒ©ãƒƒãƒ
+    int linear_counter; // ãƒªãƒ‹ã‚¢ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼
+    bool holdnote; // ãƒªãƒ‹ã‚¢ã‚«ã‚¦ãƒ³ã‚¿ãƒ¼å‹•ä½œä¸­?
+    int counter_start; // ã‚«ã‚¦ãƒ³ã‚¿é–‹å§‹
     double linear_clk;
 
-    bool random_type; // ‹U—”ƒ‚[ƒh(32K/93)
+    bool random_type; // å½ä¹±æ•°ãƒ¢ãƒ¼ãƒ‰(32K/93)
 
-    int step; // ”gŒ`¶¬‚Ég—p
-    double step_clk; // “¯ã
-    int shift_register; // ‹U—”‚Ég—p
+    int step; // æ³¢å½¢ç”Ÿæˆã«ä½¿ç”¨
+    double step_clk; // åŒä¸Š
+    int shift_register; // å½ä¹±æ•°ã«ä½¿ç”¨
   } ch[4],sch[4];
 
   struct dmc_state{
     bool enable;
     bool irq;
 
-    int playback_mode; // Ä¶ƒ‚[ƒh
-    int wave_length; // ü”g”
-    double clk; // ƒNƒƒbƒNŒvZ—p
+    int playback_mode; // å†ç”Ÿãƒ¢ãƒ¼ãƒ‰
+    int wave_length; // å‘¨æ³¢æ•°
+    double clk; // ã‚¯ãƒ­ãƒƒã‚¯è¨ˆç®—ç”¨
 
-    int counter; // ƒfƒ‹ƒ^ƒJƒEƒ“ƒ^
-    int length; // ’·‚³
+    int counter; // ãƒ‡ãƒ«ã‚¿ã‚«ã‚¦ãƒ³ã‚¿
+    int length; // é•·ã•
     int length_latch;
-    u16 adr; // ƒAƒhƒŒƒX
+    u16 adr; // ã‚¢ãƒ‰ãƒ¬ã‚¹
     u16 adr_latch;
-    int shift_reg; // “à•”ƒVƒtƒgƒŒƒWƒXƒ^
-    int shift_count; // “¯AƒJƒEƒ“ƒ^
-    int dac_lsb; // DAC‚ÌLSB
+    int shift_reg; // å†…éƒ¨ã‚·ãƒ•ãƒˆãƒ¬ã‚¸ã‚¹ã‚¿
+    int shift_count; // åŒã€ã‚«ã‚¦ãƒ³ã‚¿
+    int dac_lsb; // DACã®LSB
   } dmc,sdmc;
 
   enum ch_type{
@@ -84,7 +84,7 @@ private:
 
   void _write(ch_state *ch,dmc_state &dmc,u16 adr,u8 dat);
 
-  // ”gŒ`‚ğ¶¬B‚·‚×‚ÄU•‚Í1‚Ì”g‚Å
+  // æ³¢å½¢ã‚’ç”Ÿæˆã€‚ã™ã¹ã¦æŒ¯å¹…ã¯1ã®æ³¢ã§
   double sq_produce(ch_state &cc,double clk);
   double tri_produce(ch_state &cc,double clk);
   double noi_produce(ch_state &cc,double clk);
