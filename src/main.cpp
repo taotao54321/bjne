@@ -15,7 +15,7 @@ namespace fs = boost::filesystem;
 
 string get_base_name(fs::path& p)
 {
-    string s = p.leaf();
+    string s = p.filename().string();
     string::size_type pos = s.rfind(".");
     if(pos == string::npos)
         return s;
@@ -25,15 +25,13 @@ string get_base_name(fs::path& p)
 
 int main(int argc, char* argv[])
 {
-    freopen("CON", "w", stdout);
-
     if(argc < 2) {
         cout << "usage: " << argv[0] << " <romimage>" << endl;
         return 0;
     }
 
     // ファイル周り
-    fs::path rom_file(argv[1], fs::native);
+    fs::path rom_file(argv[1]);
     fs::path save_dir("save");
     fs::create_directory(save_dir);
     string save_base = get_base_name(rom_file);
@@ -59,7 +57,7 @@ int main(int argc, char* argv[])
     nes* _nes = new nes(nr);
     cout << "Loading ROM image ..." << endl;
     cout << endl;
-    if(!_nes->load(rom_file.native_file_string().c_str())) {
+    if(!_nes->load(rom_file.string().c_str())) {
         cout << "invalid rom-image" << endl;
         goto _quit;
     }
@@ -71,7 +69,7 @@ int main(int argc, char* argv[])
         fs::path sram_path = (save_dir / (save_base + ".sram"));
         if(fs::exists(sram_path)) {
             cout << "Loading SRAM ..." << endl;
-            if(!_nes->load_sram(sram_path.native_file_string().c_str()))
+            if(!_nes->load_sram(sram_path.string().c_str()))
                 cout << "Fail to load SRAM ..." << endl;
         }
     }
@@ -96,7 +94,7 @@ int main(int argc, char* argv[])
                     else if(ks == SDLK_F1 || ks == SDLK_F2 || ks == SDLK_F3 || ks == SDLK_F4 || ks == SDLK_F5 || ks == SDLK_F6 || ks == SDLK_F7 || ks == SDLK_F8 || ks == SDLK_F9) {
 
                         int n = (ks == SDLK_F1 ? 1 : ks == SDLK_F2 ? 2 : ks == SDLK_F3 ? 3 : ks == SDLK_F4 ? 4 : ks == SDLK_F5 ? 5 : ks == SDLK_F6 ? 6 : ks == SDLK_F7 ? 7 : ks == SDLK_F8 ? 8 : ks == SDLK_F9 ? 9 : 0);
-                        string s = (save_dir / (save_base + "-" + (char)('0' + n) + ".state")).native_file_string();
+                        string s = (save_dir / (save_base + "-" + (char)('0' + n) + ".state")).string();
 
                         if(event.key.keysym.mod & KMOD_SHIFT) {
                             if(_nes->save_state(s.c_str()))
@@ -127,7 +125,7 @@ _quit:
     ;
     {
         fs::path sram_path = (save_dir / (save_base + ".sram"));
-        if(_nes->save_sram(sram_path.native_file_string().c_str()))
+        if(_nes->save_sram(sram_path.string().c_str()))
             cout << "Saving SRAM ..." << endl;
     }
 
