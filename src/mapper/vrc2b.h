@@ -2,8 +2,7 @@
   Mapper 23: Konami VRC2 type B
  *******************************/
 
-#ifndef _VRC2B_H
-#define _VRC2B_H
+#pragma once
 
 #include "../nes.h"
 #include <iostream>
@@ -148,5 +147,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

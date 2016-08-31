@@ -2,8 +2,7 @@
   Mapper 2: UNROM
  *****************/
 
-#ifndef _UNROM_H
-#define _UNROM_H
+#pragma once
 
 #include "../nes.h"
 #include <iostream>
@@ -31,5 +30,3 @@ public:
 private:
     nes* _nes;
 };
-
-#endif

@@ -2,8 +2,7 @@
   Mapper 25: Konami VRC4
  ************************/
 
-#ifndef _VRC4_H
-#define _VRC4_H
+#pragma once
 
 #include "../nes.h"
 #include <iostream>
@@ -142,5 +141,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

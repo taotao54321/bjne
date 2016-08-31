@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL.h>
 #include <memory.h>
 #include <iostream>

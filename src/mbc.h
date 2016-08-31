@@ -1,5 +1,4 @@
-#ifndef _MBC_H
-#define _MBC_H
+#pragma once
 
 #include "types.h"
 #include "serializer.h"
@@ -37,5 +36,3 @@ private:
     bool is_vram;
     bool sram_enabled;
 };
-
-#endif

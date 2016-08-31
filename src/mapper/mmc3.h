@@ -2,8 +2,7 @@
   Mapper 4: MMC3
  ****************/
 
-#ifndef _MMC3_H
-#define _MMC3_H
+#pragma once
 
 #include "../nes.h"
 #include "../util.h"
@@ -160,5 +159,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

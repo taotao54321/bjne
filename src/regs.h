@@ -1,5 +1,4 @@
-#ifndef _REGS_H
-#define _REGS_H
+#pragma once
 
 #include "serializer.h"
 class nes;
@@ -60,5 +59,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

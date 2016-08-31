@@ -1,5 +1,4 @@
-#ifndef _NES_H
-#define _NES_H
+#pragma once
 
 #include "types.h"
 #include "rom.h"
@@ -46,5 +45,3 @@ private:
 
     renderer* _renderer;
 };
-
-#endif

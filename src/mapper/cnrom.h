@@ -2,8 +2,7 @@
   Mapper 3: CNROM
  *****************/
 
-#ifndef _CNROM_H
-#define _CNROM_H
+#pragma once
 
 #include "../nes.h"
 #include <iostream>
@@ -30,5 +29,3 @@ public:
 private:
     nes* _nes;
 };
-
-#endif

@@ -2,8 +2,7 @@
   Mapper 1: MMC1
  ****************/
 
-#ifndef _MMC1_H
-#define _MMC1_H
+#pragma once
 
 #include "../nes.h"
 #include "../util.h"
@@ -145,5 +144,3 @@ private:
     bool mirror, one_screen, switch_area, switch_size, vrom_switch_size;
     int swap_base, vrom_page[2], rom_page[2];
 };
-
-#endif

@@ -2,8 +2,7 @@
   Mapper 24: Konami VRC6
  ************************/
 
-#ifndef _VRC6_H
-#define _VRC6_H
+#pragma once
 
 #include "../nes.h"
 #include <queue>
@@ -264,5 +263,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

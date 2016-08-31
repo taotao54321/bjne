@@ -1,5 +1,4 @@
-#ifndef _CPU_H
-#define _CPU_H
+#pragma once
 
 #include "serializer.h"
 class nes;
@@ -53,5 +52,3 @@ private:
     nes* _nes;
     mbc* _mbc;
 };
-
-#endif

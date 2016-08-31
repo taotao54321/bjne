@@ -1,5 +1,4 @@
-#ifndef _PPU_H
-#define _PPU_H
+#pragma once
 
 #include "renderer.h"
 #include "serializer.h"
@@ -45,5 +44,3 @@ private:
 
     nes* _nes;
 };
-
-#endif

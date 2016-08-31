@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SDL.h>
 
 class fps_timer {

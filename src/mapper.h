@@ -1,5 +1,4 @@
-#ifndef _MAPPER_H
-#define _MAPPER_H
+#pragma once
 
 #include "types.h"
 #include "renderer.h"
@@ -18,5 +17,3 @@ class mapper_maker {
 public:
     mapper* make_mapper(int num, nes* n);
 };
-
-#endif

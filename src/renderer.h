@@ -1,8 +1,7 @@
 //--------------------------------
 // 外界とのインターフェース
 
-#ifndef _RENDERER_H
-#define _RENDERER_H
+#pragma once
 
 #include <string>
 using namespace std;
@@ -40,5 +39,3 @@ public:
 
     virtual void output_message(const string& str) = 0;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _ROM_H
-#define _ROM_H
+#pragma once
 
 #include "types.h"
 
@@ -45,5 +44,3 @@ private:
 
     u8* rom_dat, *chr_dat, *sram, *vram;
 };
-
-#endif

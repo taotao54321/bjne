@@ -1,5 +1,4 @@
-#ifndef _SERIALIZER_H
-#define _SERIALIZER_H
+#pragma once
 
 #include "types.h"
 #include <map>
@@ -212,5 +211,3 @@ private:
 
     map<string, chunk> dat;
 };
-
-#endif
