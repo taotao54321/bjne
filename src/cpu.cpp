@@ -254,14 +254,14 @@ void cpu::write16(u16 adr, u16 dat)
 #define _decr(cycle, reg) _sfta(cycle, reg, _deci)
 #define _dec(cycle, adr) _sft(cycle, adr, _deci)
 
-#define _bra(cycle, cond)                                                 \
-    {                                                                     \
-        s8 rel = (s8)read8(_imm());                                       \
-        rest -= cycle;                                                    \
-        if(cond) {                                                        \
-            rest -= (reg_pc & 0xff00) == ((reg_pc + rel) & 0xff) ? 1 : 2; \
-            reg_pc += rel;                                                \
-        }                                                                 \
+#define _bra(cycle, cond)                                                   \
+    {                                                                       \
+        s8 rel = (s8)read8(_imm());                                         \
+        rest -= cycle;                                                      \
+        if(cond) {                                                          \
+            rest -= (reg_pc & 0xff00) == ((reg_pc + rel) & 0xff00) ? 1 : 2; \
+            reg_pc += rel;                                                  \
+        }                                                                   \
     }
 
 // clkクロック実行(最低一命令は実行する)
