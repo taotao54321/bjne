@@ -32,7 +32,7 @@ public:
 
 private:
     void render_bg(int line, u8* buf);
-    int render_spr(int line, u8* buf);
+    void render_spr(int line, u8* buf);
 
     u8 sprram[0x100];
     u8 name_table[0x1000];

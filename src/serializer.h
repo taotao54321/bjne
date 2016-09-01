@@ -54,7 +54,7 @@ private:
         size |= ((u8)is.get()) << 16;
         size |= ((u8)is.get()) << 24;
         dat.resize(size);
-        for(int i = 0; i < size; i++)
+        for(u32 i = 0; i < size; i++)
             dat[i] = (u8)is.get();
     }
     void save(ofstream& os)
@@ -64,7 +64,7 @@ private:
         os.put((u8)(size >> 8));
         os.put((u8)(size >> 16));
         os.put((u8)(size >> 24));
-        for(int i = 0; i < size; i++)
+        for(u32 i = 0; i < size; i++)
             os.put(dat[i]);
     }
 
@@ -143,7 +143,7 @@ private:
 
     vector<u8> dat;
     mode cur_mode;
-    int read_pos;
+    u32 read_pos;
 };
 
 class state_data {

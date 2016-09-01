@@ -7,7 +7,7 @@ using namespace std;
 
 rom::rom()
 {
-    rom_dat = NULL, chr_dat = NULL, sram = NULL, vram == NULL;
+    rom_dat = NULL, chr_dat = NULL, sram = NULL, vram = NULL;
 }
 
 rom::~rom()
@@ -105,6 +105,7 @@ bool rom::save_sram(const char* fname)
         return false;
     fwrite(sram, 1, 0x2000, f);
     fclose(f);
+    return true;
 }
 
 bool rom::load_sram(const char* fname)
@@ -117,4 +118,5 @@ bool rom::load_sram(const char* fname)
     fseek(f, 0, SEEK_SET);
     fread(sram, 1, min(0x2000, size), f);
     fclose(f);
+    return true;
 }

@@ -147,7 +147,7 @@ public:
         }
     }
 
-    void hblank(int line)
+    void hblank(int /*line*/)
     {
         // VBlank 中でもインクリメントされ続ける
         if(irq_enable & 2) {

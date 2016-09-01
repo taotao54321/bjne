@@ -292,7 +292,7 @@ double apu::dmc_produce(double clk)
 void apu::gen_audio(sound_info* info)
 {
     static const double cpu_clock = _nes->get_cpu()->get_frequency();
-    static const double framerate = (cpu_clock * 2 / 14915);
+    //static const double framerate = (cpu_clock * 2 / 14915);
 
     s64 cur_clock = _nes->get_cpu()->get_master_clock();
     int sample = info->sample;

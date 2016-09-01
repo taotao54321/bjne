@@ -21,7 +21,7 @@ public:
         _nes->get_mbc()->map_rom(3, (rom_size - 1) * 2 + 1);
     }
 
-    void write(u16 adr, u8 dat)
+    void write(u16 /*adr*/, u8 dat)
     {
         _nes->get_mbc()->map_rom(0, dat * 2);
         _nes->get_mbc()->map_rom(1, dat * 2 + 1);

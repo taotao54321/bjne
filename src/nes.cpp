@@ -86,6 +86,8 @@ bool nes::save_state(const char* fname)
         _mapper->serialize(sd);
 
     sd.save(os);
+
+    return true;
 }
 
 bool nes::load_state(const char* fname)

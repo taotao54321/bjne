@@ -20,7 +20,7 @@ public:
             _nes->get_mbc()->map_vrom(i, i);
     }
 
-    void write(u16 adr, u8 dat)
+    void write(u16 /*adr*/, u8 dat)
     {
         for(int i = 0; i < 8; i++)
             _nes->get_mbc()->map_vrom(i, dat * 8 + i);

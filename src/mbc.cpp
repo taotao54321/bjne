@@ -1,5 +1,6 @@
 #include "nes.h"
 #include <memory.h>
+#include <cassert>
 using namespace std;
 
 mbc::mbc(nes* n)
@@ -104,6 +105,8 @@ u8 mbc::read(u16 adr)
     case 0x1E:
     case 0x1F: // 0xE000～0xFFFF
         return rom_page[3][adr & 0x1fff];
+    default:
+        assert(false);
     }
 }
 
@@ -176,7 +179,7 @@ void mbc::write_chr_rom(u16 adr, u8 dat)
 void mbc::serialize(state_data& sd)
 {
     if(sd.is_reading()) {
-        int t;
+        int t = 0;
         for(int i = 0; i < 4; i++) {
             sd["MAPPING"] << t;
             map_rom(i, t);

@@ -113,7 +113,7 @@ public:
         }
     }
 
-    void hblank(int line)
+    void hblank(int /*line*/)
     {
         if(irq_enable & 2) {
             if(irq_count == 0xff) {

@@ -82,10 +82,12 @@ public:
                 _nes->get_ppu()->set_mirroring((dat & 1) ? ppu::HORIZONTAL : ppu::VERTICAL);
             break;
         case 0xA001:
-            if((dat & 0x80) != 0)
+            if((dat & 0x80) != 0){
                 ; // enable SRAM
-            else
+            }
+            else{
                 ; // disable SRAM
+            }
             break;
 
         case 0xC000:

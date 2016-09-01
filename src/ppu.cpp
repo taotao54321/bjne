@@ -136,7 +136,7 @@ void ppu::render(int line, screen_info* scri)
 #define read_name_table(adr) (name_page[((adr) >> 10) & 3][(adr)&0x3ff])
 #define read_pat_table(adr) (_nes->get_mbc()->read_chr_rom(adr))
 
-void ppu::render_bg(int line, u8* buf)
+void ppu::render_bg(int /*line*/, u8* buf)
 {
     regs* r = _nes->get_regs();
     int x_ofs = r->ppu_adr_x & 7;
@@ -170,7 +170,7 @@ void ppu::render_bg(int line, u8* buf)
     }
 }
 
-int ppu::render_spr(int line, u8* buf)
+void ppu::render_spr(int line, u8* buf)
 {
     int spr_height = _nes->get_regs()->sprite_size ? 16 : 8;
     int pat_adr = _nes->get_regs()->sprite_pat_adr ? 0x1000 : 0x0000;
@@ -251,7 +251,7 @@ void ppu::serialize(state_data& sd)
         sd["NAMETABLE"] << name_table[i];
     if(sd.is_reading()) {
         for(int i = 0; i < 4; i++) {
-            int m;
+            int m = 0;
             sd["MIRRORING"] << m;
             name_page[i] = name_table + m % 4 * 0x400;
         }

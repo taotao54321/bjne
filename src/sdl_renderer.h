@@ -89,7 +89,7 @@ public:
         return &ret;
     }
 
-    virtual void output_screen(screen_info* info)
+    virtual void output_screen(screen_info* /*info*/)
     {
         SDL_UnlockSurface(ren);
         SDL_BlitSurface(ren, NULL, bg, NULL);
@@ -120,7 +120,7 @@ private:
 
     void audio_init()
     {
-        dat = dat = 0;
+        dat = play = 0;
         memset(buf, 0, RBUF_SIZE * sizeof(Uint16));
 
         SDL_AudioSpec fmt;
