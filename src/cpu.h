@@ -35,9 +35,12 @@ private:
         IRQ,
         RESET,
     };
-    void exec_irq(IRQ_TYPE);
+    void exec_irq(IRQ_TYPE, bool);
 
     void log();
+
+    void PUSH_P(bool b4);
+    void POP_P();
 
     u8 reg_a, reg_x, reg_y, reg_s;
     u16 reg_pc;

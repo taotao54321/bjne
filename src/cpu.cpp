@@ -38,7 +38,7 @@ void cpu::set_nmi(bool b)
 {
     // エッジセンシティブな割り込み
     if(!nmi_line && b)
-        exec_irq(NMI);
+        exec_irq(NMI, false);
     nmi_line = b;
 }
 
@@ -109,6 +109,29 @@ void cpu::write16(u16 adr, u16 dat)
         z_flag = (dat >> 1) & 1;                                                                       \
         c_flag = dat & 1;                                                                              \
     }
+
+void cpu::PUSH_P(bool b4)
+{
+    u8 flags = _bind_flags();
+    flags |= 0x20;
+    if(b4)
+        flags |= 0x10;
+    else
+        flags &= ~0x10;
+    _push8(flags);
+}
+
+void cpu::POP_P()
+{
+    // ignore bit5-4
+    u8 flags = _pop8();
+    n_flag = flags >> 7;
+    v_flag = (flags >> 6) & 1;
+    d_flag = (flags >> 3) & 1;
+    i_flag = (flags >> 2) & 1;
+    z_flag = (flags >> 1) & 1;
+    c_flag = flags & 1;
+}
 
 // TODO : decimal support
 #define _adc(cycle, adr)                                        \
@@ -273,9 +296,9 @@ void cpu::exec(int clk)
         if(!i_flag) { // IRQ チェック
             // 割り込みがかかるとラインのレベルを落とす。本当は違うんだろうけど。
             if(reset_line)
-                exec_irq(RESET), reset_line = false;
+                exec_irq(RESET, false), reset_line = false;
             else if(irq_line)
-                exec_irq(IRQ), irq_line = false;
+                exec_irq(IRQ, false), irq_line = false;
         }
 
         if(logging)
@@ -734,7 +757,7 @@ void cpu::exec(int clk)
             rest -= 6;
             break; // RTS
         case 0x40:
-            _unbind_flags(_pop8());
+            POP_P();
             reg_pc = _pop16();
             rest -= 6;
             break; // RTI
@@ -776,7 +799,7 @@ void cpu::exec(int clk)
             rest -= 3;
             break; // PHA
         case 0x08:
-            _push8(_bind_flags());
+            PUSH_P(/* b4= */ true);
             rest -= 3;
             break; // PHP
         case 0x68:
@@ -786,7 +809,7 @@ void cpu::exec(int clk)
             rest -= 4;
             break; // PLA
         case 0x28:
-            _unbind_flags(_pop8());
+            POP_P();
             rest -= 4;
             break; // PLP
 
@@ -794,7 +817,7 @@ void cpu::exec(int clk)
         case 0x00: // BRK
             b_flag = 1;
             reg_pc++;
-            exec_irq(IRQ);
+            exec_irq(IRQ, /* b4= */ true);
             break;
 
         case 0xEA:
@@ -808,14 +831,14 @@ void cpu::exec(int clk)
     } while(rest > 0);
 }
 
-void cpu::exec_irq(IRQ_TYPE it)
+void cpu::exec_irq(IRQ_TYPE it, bool b4)
 {
     if(logging)
         cout << (it == RESET ? "RESET" : it == NMI ? "NMI" : "IRQ") << " occured !" << endl;
 
     u16 vect = ((it == RESET) ? 0xFFFC : (it == NMI) ? 0xFFFA : (it == IRQ) ? 0xFFFE : 0xFFFE);
     _push16(reg_pc);
-    _push8(_bind_flags());
+    PUSH_P(b4);
     i_flag = 1;
     reg_pc = read16(vect);
     rest -= 7;
